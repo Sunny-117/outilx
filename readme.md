@@ -8,7 +8,7 @@
 pnpm install @treejs/react
 ```
 
-## Usage
+## Usage for React
 
 ```tsx
 import { Tree, DataNode } from "@treejs/react";
@@ -61,4 +61,10 @@ const App = () => {
 };
 
 export default App;
+```
+
+## Usage for Vue
+
+```tsx
+import { Tree, DataNode } from "@treejs/vue";
 ```
