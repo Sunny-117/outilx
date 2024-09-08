@@ -1,6 +1,0 @@
-{
-  "name": "@treejs",
-  "private": true,
-  "type": "module",
-  "description": "Easy to learn, high-performance, and highly scalable Tree components, supporting Vuejs and React simultaneously"
-}
