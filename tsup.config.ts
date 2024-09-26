@@ -6,7 +6,7 @@ export default defineConfig({
   format: ["esm", "cjs", "iife"],
   minify: true,
   sourcemap: true,
-  // dts: true,
+  dts: true,
   // target: 'esnext',
   // platform: 'node',
   // esbuild: true,

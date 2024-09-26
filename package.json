@@ -1,11 +1,15 @@
 {
-  "name": "tools",
-  "private": true,
-  "version": "0.0.0",
+  "name": "@sunny-117/tools",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1-alpha.0",
   "type": "module",
   "scripts": {
-    "build": "tsup --watch",
-    "test": "vitest"
+    "dev": "tsup --watch",
+    "build": "tsup",
+    "test": "vitest",
+    "postinstall": "npm run build && npm run test"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",

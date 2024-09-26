@@ -1,4 +1,4 @@
-import { pipeFromArray } from "../array";
+import { pipeFromArray } from "../../dist";
 
 const addOne = x => x + 1;
 const multiplyByTwo = x => x * 2;

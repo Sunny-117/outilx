@@ -1,4 +1,4 @@
-import { createIncrementingArray } from "../array";
+import { createIncrementingArray } from "../../dist";
 
 describe("array", () => {
   it("createIncrementingArray", () => {
