@@ -1,4 +1,4 @@
-import { getConfigFromDataSource } from "../../dist";
+import { getConfigFromDataSource } from "..";
 
 describe('getConfigFromDataSource', () => {
     it('should return correct mappings for provided data source', () => {
