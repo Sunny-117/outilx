@@ -18,9 +18,9 @@ $ npm install --save-dev outilx
 import { debounce, throttle } from "outilx";
 ```
 
-## :package: API 文档
+## :package: API 文档【wip】
 
-### Array
+<!-- ### Array
 
 #### &emsp;&emsp;[createIncrementingArray][createIncrementingArray]&emsp;&emsp;判断两个数组是否相等
 
@@ -29,4 +29,4 @@ import { debounce, throttle } from "outilx";
 #### &emsp;&emsp;[getUrlParams][getUrlParams]&emsp;&emsp;url 参数转对象
 
 [createIncrementingArray](https://github.com/Sunny-117/utils/blob/main/src/core/array.ts)
-[getUrlParams]: https://github.com/Sunny-117/utils/blob/main/src/core/url.ts
+[getUrlParams]: https://github.com/Sunny-117/utils/blob/main/src/core/url.ts -->
