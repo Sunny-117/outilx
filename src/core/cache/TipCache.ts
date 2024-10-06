@@ -1,4 +1,4 @@
-class CacheEntry<T> {
+export class CacheEntry<T> {
   value: T;
   expiry: number | null;
 
@@ -8,7 +8,7 @@ class CacheEntry<T> {
   }
 }
 
-class TipCache<T> {
+export class TipCache<T> {
   private _cachePool: Map<string, CacheEntry<T>>;
   private _maxSize: number;
 
@@ -80,5 +80,3 @@ class TipCache<T> {
     return this._cachePool.size;
   }
 }
-
-export default TipCache;

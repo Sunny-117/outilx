@@ -1,4 +1,4 @@
-import TipCache from "../core/cache/TipCache";
+import { TipCache } from "../core/cache/TipCache";
 
 describe("TipCache", () => {
   let cache: TipCache<number>;
