@@ -1,4 +1,4 @@
-import { memoize } from "../core/cache/memoize";
+import { memoize } from "outilx";
 
 describe("memoize", () => {
   it("should return the cached result for the same input", () => {

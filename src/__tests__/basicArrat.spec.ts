@@ -1,4 +1,4 @@
-import { createIncrementingArray } from "..";
+import { createIncrementingArray } from "outilx";
 
 describe("array", () => {
   it("createIncrementingArray", () => {

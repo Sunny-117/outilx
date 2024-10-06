@@ -1,4 +1,4 @@
-import { getUrlParams } from "../core/url";
+import { getUrlParams } from "outilx";
 
 describe("getUrlParams", () => {
   it("should return an empty object for an empty query string", () => {
