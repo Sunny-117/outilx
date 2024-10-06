@@ -1,18 +1,25 @@
 {
-  "name": "@sunny-117/tools",
+  "name": "outilx",
   "publishConfig": {
     "access": "public"
   },
   "version": "0.0.1-alpha.0",
   "type": "module",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "dev": "tsup --watch",
     "build": "tsup",
     "test": "vitest",
-    "postinstall": "npm run build && npm run test"
+    "postinstall": "npm run build && npm run test",
+    "release": "bumpp && npm publish",
+    "prepublish": "concurrently \"pnpm run build\" \"pnpm run test\""
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
+    "bumpp": "^9.6.1",
+    "concurrently": "^9.0.1",
     "tsup": "^8.0.1",
     "typescript": "^5.2.2",
     "vitest": "^1.1.0"
