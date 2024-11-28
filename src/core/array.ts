@@ -16,3 +16,12 @@ export function pipeFromArray(fns: Function[]) {
     return fns.reduce((prev, fn) => fn(prev), input);
   };
 }
+
+// 数组随机排序, Fisher-Yates洗牌算法
+export function shuffleArray<T>(array: T[]): T[] {
+  for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+}
