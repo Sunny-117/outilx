@@ -1,3 +1,5 @@
+import stringifyJSON from 'fast-json-stable-stringify';
+
 export const isJsonString = (str: string) => {
     try {
         if (typeof JSON.parse(str) === 'object' && str !== null) {
@@ -15,7 +17,7 @@ export function stringifyJsonWithFallback(json: unknown, fallbackValue: unknown)
         return `${fallbackValue}`;
     }
     try {
-        return JSON.stringify(json);
+        return stringifyJSON(json);
     } catch {
         return fallbackValue;
     }
