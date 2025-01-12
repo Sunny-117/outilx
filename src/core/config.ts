@@ -1,20 +1,32 @@
-type DataTuple = readonly [value: string | number, key: string, label: string];
 /**
- * 配置的数据格式
- * 按照 [value, key, label] 来配置
- * 例如
- * ``` typescript
-    export const datasource = [
-        [1, 'A', '文案A'],
-        [2, 'B', '文案B'],
-        [3, 'C', '文案C'],
-    ] as const;
- * ```
+ * Configuration utility functions
+ * @module config
+ */
+
+/**
+ * Tuple containing value, key, and label
+ * @typedef {[string|number, string, string]} DataTuple
+ */
+type DataTuple = readonly [value: string | number, key: string, label: string];
+
+/**
+ * Array of data tuples
+ * @typedef {readonly DataTuple[]} DataTupleDataSource
  */
 export type DataTupleDataSource = readonly DataTuple[];
 
+/**
+ * Index types for data tuple
+ * @typedef {0|1|2} DataTupleIndex
+ */
 type DataTupleIndex = 0 | 1 | 2;
 
+/**
+ * Extracts values from tuple based on key and value indices
+ * @template T - Data tuple type
+ * @template KeyIndex - Index for key
+ * @template ValueIndex - Index for value
+ */
 export type ExtractFromTuple<T extends DataTuple, KeyIndex extends DataTupleIndex, ValueIndex extends DataTupleIndex>
     = {
     [K in T[KeyIndex]]: Extract<
@@ -29,12 +41,10 @@ export type ExtractFromTuple<T extends DataTuple, KeyIndex extends DataTupleInde
     >[ValueIndex];
 };
 
-
 type ValueMapByKey<T extends DataTuple> = ExtractFromTuple<T, 1, 0>;
 type KeyMapByValue<T extends DataTuple> = ExtractFromTuple<T, 0, 1>;
 type NameMapByValue<T extends DataTuple> = ExtractFromTuple<T, 0, 2>;
 type NameMapByKey<T extends DataTuple> = ExtractFromTuple<T, 1, 2>;
-
 
 type DataSource<T extends DataTupleDataSource> = {
     [K in keyof T]: {
@@ -44,7 +54,6 @@ type DataSource<T extends DataTupleDataSource> = {
     };
 };
 
-
 interface ResultBase<T extends DataTupleDataSource> {
     valueMapByKey: ValueMapByKey<T[number]>;
     keyMapByValue: KeyMapByValue<T[number]>;
@@ -52,16 +61,28 @@ interface ResultBase<T extends DataTupleDataSource> {
     nameMapByKey: NameMapByKey<T[number]>;
 }
 
-
 type Result<T extends DataTupleDataSource> = {
     readonly [K in keyof ResultBase<T>]: Readonly<ResultBase<T>[K]>;
 };
 
-
 /**
- * 从配置获取Map
- * @param dataSource 数据源
- * @returns 数据映射对象
+ * Maps configuration data into various lookup objects
+ * @param {DataTupleDataSource} dataSource - Source data array
+ * @returns {Object} Object containing various mappings of the data
+ * @example
+ * ```ts
+ * const data = [
+ *   [1, 'A', '文案A'],
+ *   [2, 'B', '文案B']
+ * ] as const;
+ * const result = getConfigFromDataSource(data);
+ * // result = {
+ * //   valueMapByKey: { A: 1, B: 2 },
+ * //   keyMapByValue: { 1: 'A', 2: 'B' },
+ * //   nameMapByValue: { 1: '文案A', 2: '文案B' },
+ * //   nameMapByKey: { A: '文案A', B: '文案B' }
+ * // }
+ * ```
  */
 export function getConfigFromDataSource<T extends DataTupleDataSource>(dataSource: T): Readonly<
     Result<T> & { dataSource: DataSource<T> }

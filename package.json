@@ -16,12 +16,15 @@
     "build": "tsup",
     "test": "vitest",
     "release": "bumpp && npm publish",
-    "prepublish": "concurrently \"pnpm run build\" \"pnpm run test\""
+    "prepublish": "concurrently \"pnpm run build\" \"pnpm run test\"",
+    "docs": "jsdoc -c jsdoc.config.json"
   },
   "devDependencies": {
     "@types/node": "^20.10.5",
     "bumpp": "^9.6.1",
     "concurrently": "^9.0.1",
+    "jsdoc": "^4.0.2",
+    "better-docs": "^2.7.3",
     "outilx": "link:",
     "tsup": "^8.0.1",
     "typescript": "^5.2.2",
