@@ -1,8 +1,9 @@
-import { defineConfig, Options } from "tsup";
+import { defineConfig, Options } from "tsdown";
 import { readDirectory } from "./scripts/utils";
 import path from "path";
 
 const entry = readDirectory(path.resolve(__dirname, "src/core"));
+console.log(entry)
 
 const commonConfig: Options = {
   entry: ["./src/index.ts"],
