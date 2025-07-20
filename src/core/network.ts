@@ -37,3 +37,10 @@ export function getNetWorkInfo() {
 // navigator.connection.addEventListener("change", () => {
 //     getNetWorkInfo();
 // });
+
+
+// downlink: 当前网络连接的估计下行速度（单位为 Mbps）
+// downlinkMax: 设备网络连接最大可能下行速度（单位为 Mbps）
+// effectiveType: 当前网络连接的估计速度类型（如 slow-2g、2g、3g、4g 等）
+// rtt: 当前网络连接的估计往返时间（单位为毫秒），表示设备当前的往返延迟时间（Round-Trip Time），以毫秒为单位。它是从设备发送数据到服务器并返回的时间。
+// saveData: 是否处于数据节省模式，表示用户设备当前是否处于节省数据模式。可能的取值为 true（用户启用了节省数据模式）或 false（用户未启用节省数据模式）
