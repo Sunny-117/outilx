@@ -17,14 +17,12 @@ import stringifyJSON from 'fast-json-stable-stringify';
  */
 export const isJsonString = (str: string) => {
     try {
-        if (typeof JSON.parse(str) === 'object' && str !== null) {
-            return true;
-        }
+        const parsed = JSON.parse(str);
+        return typeof parsed === 'object' && parsed !== null;
+    } catch (e) {
+        // Silent error, no console.log for better performance
+        return false;
     }
-    catch (e) {
-        console.log(e);
-    }
-    return false;
 };
 
 /**

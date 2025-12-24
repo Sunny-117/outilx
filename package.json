@@ -22,16 +22,16 @@
     "preview:docs": "serve ./docs"
   },
   "devDependencies": {
-    "@types/node": "^20.10.5",
+    "@types/node": "^24.10.0",
     "better-docs": "^2.7.3",
-    "bumpp": "^9.6.1",
-    "concurrently": "^9.0.1",
-    "jsdoc": "^4.0.2",
+    "bumpp": "^10.3.1",
+    "concurrently": "^9.2.1",
+    "jsdoc": "^4.0.5",
     "outilx": "link:",
-    "serve": "^14.2.4",
-    "tsdown": "^0.12.9",
-    "typescript": "^5.2.2",
-    "vitest": "^1.1.0"
+    "serve": "^14.2.5",
+    "tsdown": "^0.16.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.0.8"
   },
   "dependencies": {
     "fast-json-stable-stringify": "^2.1.0",
