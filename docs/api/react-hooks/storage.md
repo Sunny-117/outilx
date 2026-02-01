@@ -66,21 +66,11 @@ function Component() {
 
 ## useUrlState
 
-Sync state with URL query parameters.
+> ⚠️ **Note**: This hook is currently under development and not yet available.
+
+Sync state with URL query parameters (Coming soon).
 
 ```tsx
-import { useUrlState } from '@outilx/react-hooks';
-
-function Component() {
-  const [state, setState] = useUrlState({ page: '1', size: '10' });
-  
-  return (
-    <div>
-      <p>Page: {state.page}, Size: {state.size}</p>
-      <button onClick={() => setState({ page: '2' })}>
-        Next Page
-      </button>
-    </div>
-  );
-}
+// This API is not yet implemented
+// import { useUrlState } from '@outilx/react-hooks';
 ```

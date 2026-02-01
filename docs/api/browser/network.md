@@ -1,54 +1,60 @@
 # Network Utilities
 
-Network and HTTP utilities for browser environments.
+Network information utilities for browser environments.
 
-## fetchWithTimeout
+## getNetWorkInfo
 
-Fetch with timeout support.
+Retrieves the current network status and connection information.
 
 ```typescript
-function fetchWithTimeout(
-  url: string,
-  options?: RequestInit & { timeout?: number }
-): Promise<Response>
+function getNetWorkInfo(): {
+  status: string;
+  type?: any;
+  rtt?: any;
+  downlink?: any;
+}
 ```
-
-### Parameters
-
-- `url` - The URL to fetch
-- `options` - Fetch options with optional timeout in milliseconds
 
 ### Returns
 
-Promise resolving to Response.
+An object containing network status and connection details:
+- `status` - `"online"` or `"offline"`
+- `type` - The effective type of the connection (e.g., '4g', '3g') when online
+- `rtt` - The estimated round-trip time in milliseconds when online
+- `downlink` - The effective bandwidth estimate in megabits per second when online
 
 ### Examples
 
 ```typescript
-import { fetchWithTimeout } from '@outilx/browser';
+import { getNetWorkInfo } from '@outilx/browser';
 
-// Basic usage
-const response = await fetchWithTimeout('https://api.example.com/data');
-const data = await response.json();
+// Get network information
+const info = getNetWorkInfo();
 
-// With timeout (5 seconds)
-try {
-  const response = await fetchWithTimeout(
-    'https://api.example.com/slow',
-    { timeout: 5000 }
-  );
-} catch (error) {
-  console.error('Request timed out');
+if (info.status === 'online') {
+  console.log(`Connection type: ${info.type}`);
+  console.log(`RTT: ${info.rtt}ms`);
+  console.log(`Downlink: ${info.downlink}Mbps`);
+} else {
+  console.log('Device is offline');
 }
 
-// With other fetch options
-const response = await fetchWithTimeout(
-  'https://api.example.com/users',
-  {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name: 'John' }),
-    timeout: 10000
-  }
-);
+// Example output when online:
+// {
+//   status: 'online',
+//   type: '4g',
+//   rtt: 50,
+//   downlink: 10
+// }
+
+// Example output when offline:
+// {
+//   status: 'offline'
+// }
 ```
+
+### Notes
+
+- The `navigator.connection` API may not be supported in all browsers
+- When offline, only the `status` property will be present
+- Connection details are estimates and may vary

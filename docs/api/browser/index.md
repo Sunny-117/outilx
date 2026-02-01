@@ -20,22 +20,26 @@ npm install @outilx/browser
 
 ```typescript
 import { 
-  chunk, 
+  toArray,
+  createIncrementingArray,
   TipCache, 
   getUrlParams,
-  safeJsonParse 
+  parseJsonWithFallback,
+  isJsonString
 } from '@outilx/browser';
 
 // Array utilities
-const chunks = chunk([1, 2, 3, 4, 5], 2);
+const arr = toArray(1); // [1]
+const nums = createIncrementingArray(5); // [1, 2, 3, 4, 5]
 
-// Caching
-const cache = new TipCache({ maxSize: 100 });
-cache.set('key', 'value');
+// Caching with LRU
+const cache = new TipCache<string>(100);
+cache.set('key', 'value', 5000); // with 5s TTL
 
-// URL parsing
-const params = getUrlParams(window.location.href);
+// URL parsing (pass query string, not full URL)
+const params = getUrlParams(window.location.search.slice(1));
 
-// Safe JSON
-const data = safeJsonParse(jsonString, {});
+// Safe JSON operations
+const data = parseJsonWithFallback(jsonString, {});
+const valid = isJsonString('{"key": "value"}'); // true
 ```

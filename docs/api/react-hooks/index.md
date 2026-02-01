@@ -18,7 +18,6 @@ A high-quality & reliable React Hooks library.
 - [useLocalStorageState](./storage.md#uselocalstoragestate) - Sync state with localStorage
 - [useSessionStorageState](./storage.md#usesessionstoragestate) - Sync state with sessionStorage
 - [useCookieState](./storage.md#usecookiestate) - Sync state with cookies
-- [useUrlState](./storage.md#useurlstate) - Sync state with URL query parameters
 
 ## Performance Hooks
 

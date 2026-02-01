@@ -1,53 +1,53 @@
 # Cache
 
-Caching utilities with TTL support and memoization.
+Caching utilities with LRU cache and simple memoization.
 
 ## TipCache
 
-A simple cache implementation with size limits and TTL (Time To Live) support.
+An LRU (Least Recently Used) cache implementation with optional TTL (Time To Live) support.
 
 ```typescript
-class TipCache<K = any, V = any>
+class TipCache<T>
 ```
 
 ### Constructor
 
 ```typescript
-new TipCache(options?: {
-  maxSize?: number;
-  ttl?: number;
-})
+new TipCache<T>(maxSize?: number)
 ```
 
-#### Options
+#### Parameters
 
-- `maxSize` - Maximum number of entries (default: 100)
-- `ttl` - Time to live in milliseconds (optional)
+- `maxSize` - Maximum number of entries (default: 5)
 
 ### Methods
 
 #### set
 
-Stores a value in the cache.
+Stores a value in the cache with optional TTL.
 
 ```typescript
-set(key: K, value: V, ttl?: number): void
+set(key: string, value: T, ttl?: number): void
 ```
+
+- `key` - The cache key (must be a string)
+- `value` - The value to cache
+- `ttl` - Time to live in milliseconds (default: 0, meaning no expiry)
 
 #### get
 
-Retrieves a value from the cache.
+Retrieves a value from the cache. Returns `null` if not found or expired.
 
 ```typescript
-get(key: K): V | undefined
+get(key: string): T | null
 ```
 
 #### has
 
-Checks if a key exists in the cache.
+Checks if a key exists in the cache and is not expired.
 
 ```typescript
-has(key: K): boolean
+has(key: string): boolean
 ```
 
 #### delete
@@ -55,15 +55,15 @@ has(key: K): boolean
 Removes a key from the cache.
 
 ```typescript
-delete(key: K): boolean
+delete(key: string): boolean
 ```
 
-#### clear
+#### size
 
-Clears all entries from the cache.
+Returns the current number of entries in the cache.
 
 ```typescript
-clear(): void
+size(): number
 ```
 
 ### Examples
@@ -72,43 +72,44 @@ clear(): void
 import { TipCache } from '@outilx/browser';
 
 // Basic usage
-const cache = new TipCache({ maxSize: 100 });
+const cache = new TipCache<{ name: string }>(100);
 cache.set('user:1', { name: 'John' });
 console.log(cache.get('user:1'));  // { name: 'John' }
 
 // With TTL
-const ttlCache = new TipCache({ ttl: 5000 }); // 5 seconds
-ttlCache.set('temp', 'value');
+const ttlCache = new TipCache<string>(10);
+ttlCache.set('temp', 'value', 5000); // 5 seconds TTL
 console.log(ttlCache.get('temp'));  // 'value'
 // After 5 seconds...
-console.log(ttlCache.get('temp'));  // undefined
+console.log(ttlCache.get('temp'));  // null
 
-// Per-item TTL
-cache.set('short-lived', 'data', 1000);  // 1 second TTL
+// LRU behavior - oldest entry is removed when maxSize is reached
+const lruCache = new TipCache<number>(3);
+lruCache.set('a', 1);
+lruCache.set('b', 2);
+lruCache.set('c', 3);
+lruCache.set('d', 4);  // 'a' is removed (oldest)
+console.log(lruCache.has('a'));  // false
+console.log(lruCache.size());    // 3
 ```
 
 ## memoize
 
-Creates a memoized version of a function that caches results.
+Creates a memoized version of a single-argument function that caches results.
 
 ```typescript
-function memoize<T extends (...args: any[]) => any>(
-  fn: T,
-  options?: {
-    maxSize?: number;
-    ttl?: number;
-  }
-): T
+function memoize<R>(
+  fn: (arg: any) => R
+): (arg: any) => R
 ```
 
 ### Parameters
 
-- `fn` - The function to memoize
-- `options` - Cache options (same as TipCache)
+- `fn` - A function that takes a single argument and returns a non-void value
 
 ### Returns
 
-Memoized version of the function.
+Memoized version of the function that caches results based on the argument.
 
 ### Examples
 
@@ -116,20 +117,24 @@ Memoized version of the function.
 import { memoize } from '@outilx/browser';
 
 // Expensive computation
-const fibonacci = memoize((n: number): number => {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
+const square = memoize((n: number) => {
+  console.log('Computing...');
+  return n * n;
 });
 
-fibonacci(40);  // Computed once
-fibonacci(40);  // Returns cached result
+square(5);  // Logs "Computing..." and returns 25
+square(5);  // Returns 25 immediately (cached)
+square(10); // Logs "Computing..." and returns 100
 
-// With TTL
-const fetchUser = memoize(
-  async (id: string) => {
-    const response = await fetch(\`/api/users/\${id}\`);
-    return response.json();
-  },
-  { ttl: 60000 } // Cache for 1 minute
-);
+// Works with any single argument
+const getUser = memoize((id: string) => {
+  return { id, name: `User ${id}` };
+});
+
+getUser('123');  // Creates object
+getUser('123');  // Returns cached object
 ```
+
+::: warning Note
+The `memoize` function only works with single-argument functions. For more complex memoization needs, consider using TipCache directly.
+:::

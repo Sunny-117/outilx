@@ -15,11 +15,14 @@ npm install @outilx/browser
 Powerful array manipulation functions:
 
 ```typescript
-import { toArray, shuffleArray, pipeFromArray } from '@outilx/browser';
+import { toArray, shuffleArray, pipeFromArray, createIncrementingArray } from '@outilx/browser';
 
 // Convert values to arrays
 toArray(1);  // [1]
 toArray([1, 2]);  // [1, 2]
+
+// Create incrementing arrays
+createIncrementingArray(5);  // [1, 2, 3, 4, 5]
 
 // Shuffle arrays
 shuffleArray([1, 2, 3, 4, 5]);
@@ -38,9 +41,10 @@ Built-in caching with TTL support:
 ```typescript
 import { TipCache, memoize } from '@outilx/browser';
 
-// Simple cache
-const cache = new TipCache({ maxSize: 100, ttl: 5000 });
-cache.set('key', 'value');
+// Simple cache with LRU
+const cache = new TipCache(100); // maxSize: 100
+cache.set('key', 'value', 5000); // ttl: 5000ms
+const value = cache.get('key');
 
 // Memoization
 const expensive = memoize((n: number) => {
@@ -56,7 +60,7 @@ Easy URL parameter parsing:
 ```typescript
 import { getUrlParams } from '@outilx/browser';
 
-const params = getUrlParams('https://example.com?foo=bar&baz=qux');
+const params = getUrlParams('foo=bar&baz=qux');
 // { foo: 'bar', baz: 'qux' }
 ```
 
@@ -65,27 +69,48 @@ const params = getUrlParams('https://example.com?foo=bar&baz=qux');
 Safe JSON operations:
 
 ```typescript
-import { safeJsonParse, stableStringify } from '@outilx/browser';
+import { parseJsonWithFallback, stringifyJsonWithFallback, isJsonString } from '@outilx/browser';
 
 // Safe parsing
-const data = safeJsonParse('{"name":"John"}', {});
+const data = parseJsonWithFallback('{"name":"John"}', {});
 
-// Deterministic stringify
-stableStringify({ b: 2, a: 1 });  // '{"a":1,"b":2}'
+// Safe stringify
+const str = stringifyJsonWithFallback({ name: 'John' }, '{}');
+
+// Check if valid JSON
+isJsonString('{"valid": true}');  // true
 ```
 
 ### Network Utilities
 
-Simplified network operations:
+Get network information:
 
 ```typescript
-import { fetchWithTimeout, retry } from '@outilx/browser';
+import { getNetWorkInfo } from '@outilx/browser';
 
-// Fetch with timeout
-const response = await fetchWithTimeout(url, { timeout: 5000 });
+const info = getNetWorkInfo();
+// { status: 'online', type: '4g', rtt: 50, downlink: 10 }
+```
 
-// Retry failed requests
-const data = await retry(() => fetch(url), { retries: 3 });
+### Configuration Utilities
+
+Map configuration data:
+
+```typescript
+import { getConfigFromDataSource } from '@outilx/browser';
+
+const data = [
+  [1, 'A', 'Label A'],
+  [2, 'B', 'Label B']
+] as const;
+
+const config = getConfigFromDataSource(data);
+// {
+//   valueMapByKey: { A: 1, B: 2 },
+//   keyMapByValue: { 1: 'A', 2: 'B' },
+//   nameMapByValue: { 1: 'Label A', 2: 'Label B' },
+//   nameMapByKey: { A: 'Label A', B: 'Label B' }
+// }
 ```
 
 ## API Reference

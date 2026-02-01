@@ -45,10 +45,10 @@ Then import and use:
 ::: code-group
 
 ```typescript [Browser]
-import { chunk, TipCache, getUrlParams } from '@outilx/browser';
+import { toArray, TipCache, getUrlParams } from '@outilx/browser';
 
-const chunks = chunk([1, 2, 3, 4, 5], 2);
-// [[1, 2], [3, 4], [5]]
+const arr = toArray(1); // [1]
+const cache = new TipCache({ ttl: 5000 });
 ```
 
 ```typescript [Node.js]

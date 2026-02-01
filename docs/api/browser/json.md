@@ -2,73 +2,96 @@
 
 Safe JSON parsing and stringification utilities.
 
-## safeJsonParse
+## isJsonString
 
-Safely parses JSON with error handling.
+Checks if a string is valid JSON.
 
 ```typescript
-function safeJsonParse<T = any>(
-  json: string,
-  defaultValue?: T
-): T | undefined
+function isJsonString(str: string): boolean
 ```
 
 ### Parameters
 
-- `json` - The JSON string to parse
-- `defaultValue` - Optional default value if parsing fails
+- `str` - The string to check
 
 ### Returns
 
-Parsed object or default value if parsing fails.
+`true` if the string is valid JSON, `false` otherwise.
 
 ### Examples
 
 ```typescript
-import { safeJsonParse } from '@outilx/browser';
+import { isJsonString } from '@outilx/browser';
 
-// Valid JSON
-safeJsonParse('{"name":"John"}');  // { name: 'John' }
-
-// Invalid JSON
-safeJsonParse('invalid json');  // undefined
-safeJsonParse('invalid json', {});  // {}
-
-// With type
-interface User {
-  name: string;
-  age: number;
-}
-const user = safeJsonParse<User>('{"name":"John","age":30}');
+isJsonString('{"key": "value"}');  // true
+isJsonString('{key: value}');  // false
+isJsonString('null');  // true
+isJsonString('undefined');  // false
 ```
 
-## stableStringify
+## parseJsonWithFallback
 
-Creates a deterministic JSON string (properties sorted).
+Safely parses a JSON string with fallback value.
 
 ```typescript
-function stableStringify(obj: any): string
+function parseJsonWithFallback(jsonValue?: any, fallbackValue?: unknown): any
 ```
 
 ### Parameters
 
-- `obj` - The object to stringify
+- `jsonValue` - The JSON string to parse (default: `''`)
+- `fallbackValue` - Value to return if parsing fails (optional)
 
 ### Returns
 
-Deterministic JSON string with sorted keys.
+Parsed JSON object or fallback value if parsing fails.
 
 ### Examples
 
 ```typescript
-import { stableStringify } from '@outilx/browser';
+import { parseJsonWithFallback } from '@outilx/browser';
 
-const obj1 = { b: 2, a: 1 };
-const obj2 = { a: 1, b: 2 };
+parseJsonWithFallback('{"key": "value"}');  
+// { key: 'value' }
 
-stableStringify(obj1);  // '{"a":1,"b":2}'
-stableStringify(obj2);  // '{"a":1,"b":2}'
+parseJsonWithFallback('{key: value}', { default: true });  
+// { default: true }
 
-// Same output regardless of property order
-stableStringify(obj1) === stableStringify(obj2);  // true
+parseJsonWithFallback('', []);  
+// []
+```
+
+## stringifyJsonWithFallback
+
+Safely stringifies a JSON value with fallback.
+
+```typescript
+function stringifyJsonWithFallback(json: unknown, fallbackValue: unknown): unknown
+```
+
+### Parameters
+
+- `json` - The value to stringify
+- `fallbackValue` - Value to return if stringification fails
+
+### Returns
+
+Stringified JSON or fallback value if stringification fails.
+
+### Examples
+
+```typescript
+import { stringifyJsonWithFallback } from '@outilx/browser';
+
+stringifyJsonWithFallback({ key: 'value' }, '{}');  
+// '{"key":"value"}'
+
+// Circular reference handling
+const obj: any = {};
+obj.self = obj;
+stringifyJsonWithFallback(obj, '{}');  
+// '{}'
+
+stringifyJsonWithFallback(undefined, 'null');  
+// 'null'
 ```

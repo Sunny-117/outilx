@@ -38,9 +38,10 @@ You can use @outilx/browser directly from a CDN:
 
 ```html
 <script type="module">
-  import { chunk } from 'https://esm.sh/@outilx/browser';
+  import { toArray, shuffleArray } from 'https://esm.sh/@outilx/browser';
   
-  console.log(chunk([1, 2, 3, 4], 2));
+  console.log(toArray(1)); // [1]
+  console.log(shuffleArray([1, 2, 3, 4])); // random order
 </script>
 ```
 
@@ -49,10 +50,10 @@ You can use @outilx/browser directly from a CDN:
 Both packages are written in TypeScript and include type definitions out of the box. No additional setup required!
 
 ```typescript
-import { chunk } from '@outilx/browser';
+import { toArray, TipCache } from '@outilx/browser';
 
-const result = chunk([1, 2, 3, 4], 2);
-// TypeScript knows result is number[][]
+const arr = toArray(1); // TypeScript knows arr is number[]
+const cache = new TipCache<string>(10); // Type-safe cache
 ```
 
 ## Version Compatibility

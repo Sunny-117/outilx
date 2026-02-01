@@ -42,9 +42,9 @@ npm install @outilx/react-hooks
 
 ```typescript
 // @outilx/browser - Array manipulation, caching, JSON utilities
-import { chunk, TipCache, safeJsonParse } from '@outilx/browser';
+import { toArray, TipCache, parseJsonWithFallback } from '@outilx/browser';
 
-const chunks = chunk([1, 2, 3, 4, 5], 2);
+const arr = toArray(1); // [1]
 const cache = new TipCache({ ttl: 5000 });
 
 // @outilx/node - File operations, directory management
