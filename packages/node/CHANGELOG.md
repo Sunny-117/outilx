@@ -1,5 +1,11 @@
 # @outilx/node
 
+## 0.0.12
+
+### Patch Changes
+
+- 发布新版本
+
 ## 0.0.11
 
 ### Patch Changes
