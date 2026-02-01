@@ -157,7 +157,13 @@ async function main() {
   log.success('构建完成');
 
   // 检查是否有 changeset，如果没有则自动创建
-  const changesetFiles = fs.readdirSync('.changeset')
+  const changesetDir = '.changeset';
+  if (!fs.existsSync(changesetDir)) {
+    log.info('创建 .changeset 目录...');
+    fs.mkdirSync(changesetDir, { recursive: true });
+  }
+  
+  const changesetFiles = fs.readdirSync(changesetDir)
     .filter(f => f.endsWith('.md') && f !== 'README.md');
   
   if (changesetFiles.length === 0) {
