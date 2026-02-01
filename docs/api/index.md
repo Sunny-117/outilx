@@ -40,22 +40,22 @@ Git repository automation utilities.
 
 ## @outilx/react-hooks
 
-A high-quality & reliable React Hooks library.
+A comprehensive React Hooks library for state management, storage, performance optimization, and async operations.
 
 ### [State Management](/api/react-hooks/state)
-Hooks for managing different types of state.
+Hooks for managing different types of state (boolean, toggle, counter, map, array, number, custom methods).
 
 ### [Storage](/api/react-hooks/storage)
-Hooks for syncing state with storage mechanisms.
+Hooks for syncing state with storage mechanisms (localStorage, sessionStorage, cookies, URL).
 
 ### [Performance](/api/react-hooks/performance)
-Hooks for optimizing React components.
+Hooks for optimizing React components (memoization, latest value reference).
 
 ### [Lifecycle](/api/react-hooks/lifecycle)
-Hooks for handling component lifecycle.
+Hooks for handling component lifecycle events.
 
 ### [Async](/api/react-hooks/async)
-Hooks for handling asynchronous operations.
+Hooks for handling asynchronous operations (cancelable tasks, pending state tracking).
 
 ### [Utilities](/api/react-hooks/utilities)
 Utility functions for creating custom hooks.

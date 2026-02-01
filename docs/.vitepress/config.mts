@@ -2,9 +2,13 @@ import { defineConfig } from "vitepress";
 
 export default defineConfig({
   title: "Outilx",
-  description: "Modern utility libraries for Node.js and Browser",
-  base: "/",
+  description: "Modern utility library collection for JavaScript/TypeScript",
+  base: "/outilx/",
+  head: [
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/outilx/favicon.svg' }],
+  ],
   themeConfig: {
+    logo: '/logo.svg',
     nav: [
       { text: "Guide", link: "/guide/" },
       { text: "API", link: "/api/" },

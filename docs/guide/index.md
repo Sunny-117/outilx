@@ -4,7 +4,9 @@ Welcome to Outilx documentation!
 
 ## What is Outilx?
 
-Outilx is a collection of modern utility libraries designed for both Node.js and Browser environments. It provides three main packages:
+Outilx is a modern, modular utility library collection for JavaScript/TypeScript development. It provides high-quality, well-tested utilities across different environments and frameworks.
+
+**Current Packages:**
 
 - **[@outilx/browser](/guide/browser)** - Utilities for browser environments
 - **[@outilx/node](/guide/node)** - Utilities for Node.js environments
@@ -12,11 +14,11 @@ Outilx is a collection of modern utility libraries designed for both Node.js and
 
 ## Features
 
-- 🌐 **Universal**: Separate packages for browser and Node.js
-- 📦 **Tree-shakeable**: Import only what you need
-- 🔷 **TypeScript**: Full type definitions included
-- ⚡ **Modern**: Built with latest JavaScript features
-- 🧪 **Tested**: Comprehensive test coverage
+- 🎯 **Modular** - Install only what you need
+- 📦 **Tree-shakeable** - Optimized bundle sizes
+- 🔷 **TypeScript** - Full type definitions included
+- ⚡ **Modern** - Built with latest JavaScript features
+- 🧪 **Tested** - Comprehensive test coverage
 
 ## Quick Start
 
