@@ -1,0 +1,30 @@
+<svg width="200" height="200" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="96" fill="url(#gradient)" stroke="#667eea" stroke-width="3"/>
+  
+  <!-- Hexagon shape representing modularity -->
+  <path d="M100 40 L135 62.5 L135 107.5 L100 130 L65 107.5 L65 62.5 Z" 
+        fill="none" stroke="white" stroke-width="5" stroke-linejoin="round"/>
+  
+  <!-- Inner connections representing utilities -->
+  <line x1="100" y1="40" x2="100" y2="85" stroke="white" stroke-width="3.5"/>
+  <line x1="100" y1="85" x2="135" y2="62.5" stroke="white" stroke-width="3.5"/>
+  <line x1="100" y1="85" x2="65" y2="62.5" stroke="white" stroke-width="3.5"/>
+  <line x1="100" y1="85" x2="135" y2="107.5" stroke="white" stroke-width="3.5"/>
+  <line x1="100" y1="85" x2="65" y2="107.5" stroke="white" stroke-width="3.5"/>
+  
+  <!-- Center dot -->
+  <circle cx="100" cy="85" r="7" fill="white"/>
+  
+  <!-- Text -->
+  <text x="100" y="165" font-family="Arial, sans-serif" font-size="28" font-weight="bold" 
+        fill="white" text-anchor="middle" letter-spacing="2">OUTILX</text>
+  
+  <!-- Gradient definition -->
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+</svg>
