@@ -3,7 +3,7 @@ import { defineConfig } from "vitepress";
 export default defineConfig({
   title: "Outilx",
   description: "Modern utility libraries for Node.js and Browser",
-  base: "/outilx/",
+  base: "/",
   themeConfig: {
     nav: [
       { text: "Guide", link: "/guide/" },

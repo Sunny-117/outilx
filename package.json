@@ -1,25 +1,28 @@
 {
-  "name": "outilx-monorepo",
-  "private": true,
+  "name": "outilx",
   "version": "0.0.1",
-  "type": "module",
+  "private": true,
+  "packageManager": "pnpm@9.12.1",
   "scripts": {
-    "build": "pnpm -r --filter \"./packages/*\" run build",
-    "test": "pnpm -r --filter \"./packages/*\" run test",
-    "release": "pnpm -r --filter \"./packages/*\" run release",
-    "docs:dev": "vitepress dev docs",
-    "docs:build": "vitepress build docs",
-    "docs:preview": "vitepress preview docs"
+    "clean": "turbo run clean",
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "test": "turbo run test",
+    "docs:dev": "pnpm --filter @outilx/docs dev",
+    "docs:build": "pnpm --filter @outilx/docs build",
+    "docs:preview": "pnpm --filter @outilx/docs preview",
+    "changeset": "changeset",
+    "version": "changeset version",
+    "release": "changeset publish"
   },
   "devDependencies": {
+    "@changesets/cli": "^2.28.1",
     "@types/node": "^24.10.0",
-    "bumpp": "^10.3.1",
-    "concurrently": "^9.2.1",
+    "rimraf": "^5.0.10",
     "tsdown": "^0.16.1",
-    "tsx": "^4.19.2",
+    "turbo": "^2.5.6",
     "typescript": "^5.9.3",
     "vitepress": "^1.5.0",
     "vitest": "^4.0.8"
-  },
-  "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
+  }
 }

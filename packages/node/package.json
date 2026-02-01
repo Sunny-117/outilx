@@ -1,13 +1,8 @@
 {
   "name": "@outilx/node",
-  "publishConfig": {
-    "access": "public"
-  },
   "version": "0.0.7",
+  "description": "Node.js utility functions",
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,11 +19,18 @@
     },
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "tsdown",
+    "dev": "tsdown --watch",
     "test": "echo \"No tests yet\"",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
+    "clean": "rimraf dist"
   },
   "dependencies": {
     "axios": "^1.7.9",

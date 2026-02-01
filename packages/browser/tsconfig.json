@@ -1,24 +1,11 @@
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "target": "es2016",
-    "lib": [
-      "DOM",
-      "es6",
-      "ES2016"
-    ],
-    "module": "esnext",
-    "moduleResolution": "node",
-    "types": [
-      "vitest/globals"
-    ],
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
-    "strict": true,
-    "noImplicitAny": false,
-    "skipLibCheck": true,
-    "composite": true
+    "outDir": "dist",
+    "rootDir": "src",
+    "composite": true,
+    "types": ["vitest/globals"]
   },
-  "include": [
-    "./src/**/*"
-  ]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

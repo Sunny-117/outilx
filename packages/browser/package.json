@@ -1,13 +1,8 @@
 {
   "name": "@outilx/browser",
-  "publishConfig": {
-    "access": "public"
-  },
   "version": "0.0.1-alpha.6",
+  "description": "Browser utility functions for modern web development",
   "type": "module",
-  "files": [
-    "dist"
-  ],
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -24,15 +19,20 @@
     },
     "./package.json": "./package.json"
   },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
-    "dev": "tsdown --watch",
     "build": "tsdown",
+    "dev": "tsdown --watch",
     "test": "vitest --run",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
+    "clean": "rimraf dist"
   },
   "dependencies": {
-    "fast-json-stable-stringify": "^2.1.0",
-    "unplugin-glob": "^0.3.3"
+    "fast-json-stable-stringify": "^2.1.0"
   }
 }
