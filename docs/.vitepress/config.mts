@@ -77,7 +77,7 @@ export default defineConfig({
       ],
     },
     socialLinks: [
-      { icon: "github", link: "https://github.com/yourusername/outilx" },
+      { icon: "github", link: "https://github.com/Sunny-117/outilx" },
     ],
     search: {
       provider: "local",
