@@ -1,6 +1,6 @@
 {
   "name": "@outilx/react-hooks",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A high-quality & reliable React Hooks library",
   "type": "module",
   "main": "./dist/index.cjs",
