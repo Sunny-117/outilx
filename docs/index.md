@@ -1,0 +1,29 @@
+---
+layout: home
+
+hero:
+  name: "Outilx"
+  text: "Modern Utility Libraries"
+  tagline: Utility functions for Node.js and Browser environments
+  actions:
+    - theme: brand
+      text: Get Started
+      link: /guide/
+    - theme: alt
+      text: API Reference
+      link: /api/
+
+features:
+  - icon: 🌐
+    title: Browser Utilities
+    details: Array manipulation, caching, URL parsing, and network utilities for modern web development
+  - icon: 🚀
+    title: Node.js Utilities
+    details: File operations, directory management, and repository automation for Node.js
+  - icon: 📦
+    title: Tree-shakeable
+    details: Import only what you need with full ESM and CJS support
+  - icon: 🔷
+    title: TypeScript First
+    details: Written in TypeScript with complete type definitions
+---

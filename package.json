@@ -1,41 +1,25 @@
 {
-  "name": "outilx",
-  "publishConfig": {
-    "access": "public"
-  },
-  "version": "0.0.1-alpha.6",
+  "name": "outilx-monorepo",
+  "private": true,
+  "version": "0.0.1",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "module": "dist/esm/index.js",
-  "main": "dist/cjs/index.cjs",
-  "types": "dist/esm/index.d.ts",
   "scripts": {
-    "dev": "tsdown --watch",
-    "build": "tsdown",
-    "migrate": "tsdown migrate",
-    "test": "vitest",
-    "release": "bumpp && npm publish",
-    "prepublish": "concurrently \"pnpm run build\" \"pnpm run test\"",
-    "docs": "jsdoc -c jsdoc.config.json",
-    "preview:docs": "serve ./docs"
+    "build": "pnpm -r --filter \"./packages/*\" run build",
+    "test": "pnpm -r --filter \"./packages/*\" run test",
+    "release": "pnpm -r --filter \"./packages/*\" run release",
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs"
   },
   "devDependencies": {
     "@types/node": "^24.10.0",
-    "better-docs": "^2.7.3",
     "bumpp": "^10.3.1",
     "concurrently": "^9.2.1",
-    "jsdoc": "^4.0.5",
-    "outilx": "link:",
-    "serve": "^14.2.5",
     "tsdown": "^0.16.1",
+    "tsx": "^4.19.2",
     "typescript": "^5.9.3",
+    "vitepress": "^1.5.0",
     "vitest": "^4.0.8"
-  },
-  "dependencies": {
-    "fast-json-stable-stringify": "^2.1.0",
-    "unplugin-glob": "^0.3.3"
   },
   "packageManager": "pnpm@9.12.1+sha512.e5a7e52a4183a02d5931057f7a0dbff9d5e9ce3161e33fa68ae392125b79282a8a8a470a51dfc8a0ed86221442eb2fb57019b0990ed24fab519bf0e1bc5ccfc4"
 }

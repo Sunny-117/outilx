@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "lib": [
+      "DOM",
+      "es6",
+      "ES2016"
+    ],
+    "module": "esnext",
+    "moduleResolution": "node",
+    "types": [
+      "vitest/globals"
+    ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "composite": true
+  },
+  "include": [
+    "./src/**/*"
+  ]
+}
