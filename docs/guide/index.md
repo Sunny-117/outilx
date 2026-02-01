@@ -4,10 +4,11 @@ Welcome to Outilx documentation!
 
 ## What is Outilx?
 
-Outilx is a collection of modern utility libraries designed for both Node.js and Browser environments. It provides two main packages:
+Outilx is a collection of modern utility libraries designed for both Node.js and Browser environments. It provides three main packages:
 
 - **[@outilx/browser](/guide/browser)** - Utilities for browser environments
 - **[@outilx/node](/guide/node)** - Utilities for Node.js environments
+- **[@outilx/react-hooks](/guide/react-hooks)** - High-quality React Hooks library
 
 ## Features
 
@@ -31,6 +32,10 @@ npm install @outilx/browser
 npm install @outilx/node
 ```
 
+```bash [React]
+npm install @outilx/react-hooks
+```
+
 :::
 
 Then import and use:
@@ -51,10 +56,21 @@ await ensureDirExists('./my-dir');
 await deleteEmptyDirs('./my-dir');
 ```
 
+```typescript [React]
+import { useBoolean, useCounter } from '@outilx/react-hooks';
+
+function App() {
+  const [visible, { toggle }] = useBoolean(false);
+  const [count, { inc }] = useCounter(0);
+  return <div>...</div>;
+}
+```
+
 :::
 
 ## Next Steps
 
 - Learn about [@outilx/browser](/guide/browser)
 - Learn about [@outilx/node](/guide/node)
+- Learn about [@outilx/react-hooks](/guide/react-hooks)
 - Browse the [API Reference](/api/)

@@ -173,6 +173,7 @@ async function main() {
     const packages = [
       '@outilx/browser',
       '@outilx/node',
+      '@outilx/react-hooks',
     ];
     
     // 创建 changeset 内容
@@ -271,6 +272,8 @@ ${message}
   console.log('  npm view @outilx/browser versions');
   console.log('  npm view @outilx/node dist-tags');
   console.log('  npm view @outilx/node versions');
+  console.log('  npm view @outilx/react-hooks dist-tags');
+  console.log('  npm view @outilx/react-hooks versions');
 }
 
 main().catch((error) => {

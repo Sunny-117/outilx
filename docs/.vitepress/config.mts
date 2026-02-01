@@ -13,6 +13,7 @@ export default defineConfig({
         items: [
           { text: "@outilx/browser", link: "/api/browser/" },
           { text: "@outilx/node", link: "/api/node/" },
+          { text: "@outilx/react-hooks", link: "/api/react-hooks/" },
         ],
       },
     ],
@@ -30,6 +31,7 @@ export default defineConfig({
           items: [
             { text: "Browser", link: "/guide/browser" },
             { text: "Node.js", link: "/guide/node" },
+            { text: "React Hooks", link: "/guide/react-hooks" },
           ],
         },
       ],
@@ -54,6 +56,18 @@ export default defineConfig({
             { text: "File Operations", link: "/api/node/file-operations" },
             { text: "Directory", link: "/api/node/directory" },
             { text: "Repository", link: "/api/node/repository" },
+          ],
+        },
+        {
+          text: "@outilx/react-hooks",
+          items: [
+            { text: "Overview", link: "/api/react-hooks/" },
+            { text: "State Management", link: "/api/react-hooks/state" },
+            { text: "Storage", link: "/api/react-hooks/storage" },
+            { text: "Performance", link: "/api/react-hooks/performance" },
+            { text: "Lifecycle", link: "/api/react-hooks/lifecycle" },
+            { text: "Async", link: "/api/react-hooks/async" },
+            { text: "Utilities", link: "/api/react-hooks/utilities" },
           ],
         },
       ],

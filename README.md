@@ -1,4 +1,4 @@
-# Outilx Monorepo
+# outilx
 
 A collection of utility libraries for Node.js and Browser environments.
 

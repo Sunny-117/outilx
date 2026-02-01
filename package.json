@@ -11,6 +11,7 @@
     "docs:dev": "pnpm --filter @outilx/docs dev",
     "docs:build": "pnpm --filter @outilx/docs build",
     "docs:preview": "pnpm --filter @outilx/docs preview",
+    "playground": "pnpm --filter playground dev",
     "changeset": "changeset",
     "version": "changeset version",
     "release": "node scripts/release.js",
