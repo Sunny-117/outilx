@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSE 测试</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            cursor: pointer;
+        }
+        #status {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        #messages {
+            border: 1px solid #ddd;
+            padding: 10px;
+            min-height: 200px;
+            max-height: 400px;
+            overflow-y: auto;
+            background: #f5f5f5;
+        }
+        .message {
+            padding: 5px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+    <h1>SSE 连接测试</h1>
+    
+    <div>
+        <button id="connect">连接</button>
+        <button id="disconnect">断开</button>
+        <button id="clear">清空消息</button>
+    </div>
+    
+    <div id="status">状态: 未连接</div>
+    
+    <h3>接收到的消息:</h3>
+    <div id="messages"></div>
+    
+    <h3>日志:</h3>
+    <div id="logs" style="font-family: monospace; font-size: 12px;"></div>
+
+    <script>
+        let eventSource = null;
+        const statusDiv = document.getElementById('status');
+        const messagesDiv = document.getElementById('messages');
+        const logsDiv = document.getElementById('logs');
+        
+        function log(message) {
+            const time = new Date().toLocaleTimeString();
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `[${time}] ${message}`;
+            logsDiv.appendChild(logEntry);
+            console.log(message);
+        }
+        
+        document.getElementById('connect').addEventListener('click', () => {
+            if (eventSource) {
+                log('关闭现有连接');
+                eventSource.close();
+            }
+            
+            log('开始连接到 http://localhost:3001/sse');
+            statusDiv.textContent = '状态: 连接中...';
+            statusDiv.style.background = '#fff3cd';
+            
+            try {
+                eventSource = new EventSource('http://localhost:3001/sse');
+                log('EventSource 创建成功');
+                log('初始 readyState: ' + eventSource.readyState);
+                
+                eventSource.onopen = (e) => {
+                    log('✓ onopen 触发');
+                    statusDiv.textContent = '状态: 已连接';
+                    statusDiv.style.background = '#d4edda';
+                };
+                
+                eventSource.onmessage = (event) => {
+                    log('📨 收到消息: ' + event.data);
+                    
+                    const msgDiv = document.createElement('div');
+                    msgDiv.className = 'message';
+                    msgDiv.textContent = event.data;
+                    messagesDiv.appendChild(msgDiv);
+                    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+                    
+                    // 如果还在连接中，更新状态
+                    if (statusDiv.textContent === '状态: 连接中...') {
+                        statusDiv.textContent = '状态: 已连接 (通过消息)';
+                        statusDiv.style.background = '#d4edda';
+                    }
+                };
+                
+                eventSource.onerror = (error) => {
+                    log('✗ onerror 触发');
+                    log('readyState: ' + eventSource.readyState);
+                    log('error: ' + JSON.stringify(error));
+                    
+                    if (eventSource.readyState === EventSource.CLOSED) {
+                        log('连接已关闭');
+                        statusDiv.textContent = '状态: 错误 (连接关闭)';
+                        statusDiv.style.background = '#f8d7da';
+                    } else if (eventSource.readyState === EventSource.CONNECTING) {
+                        log('正在重连...');
+                        statusDiv.textContent = '状态: 重连中...';
+                        statusDiv.style.background = '#fff3cd';
+                    }
+                };
+                
+                // 检查 readyState
+                setTimeout(() => {
+                    log('100ms 后 readyState: ' + eventSource.readyState);
+                }, 100);
+                
+                setTimeout(() => {
+                    log('500ms 后 readyState: ' + eventSource.readyState);
+                }, 500);
+                
+            } catch (error) {
+                log('✗ 创建 EventSource 失败: ' + error.message);
+                statusDiv.textContent = '状态: 错误';
+                statusDiv.style.background = '#f8d7da';
+            }
+        });
+        
+        document.getElementById('disconnect').addEventListener('click', () => {
+            if (eventSource) {
+                log('断开连接');
+                eventSource.close();
+                eventSource = null;
+                statusDiv.textContent = '状态: 已断开';
+                statusDiv.style.background = '#e2e3e5';
+            }
+        });
+        
+        document.getElementById('clear').addEventListener('click', () => {
+            messagesDiv.innerHTML = '';
+            logsDiv.innerHTML = '';
+            log('已清空');
+        });
+    </script>
+</body>
+</html>

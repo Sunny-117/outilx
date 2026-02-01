@@ -174,6 +174,7 @@ async function main() {
       '@outilx/browser',
       '@outilx/node',
       '@outilx/react-hooks',
+      '@outilx/ai',
     ];
     
     // 创建 changeset 内容
@@ -274,6 +275,8 @@ ${message}
   console.log('  npm view @outilx/node versions');
   console.log('  npm view @outilx/react-hooks dist-tags');
   console.log('  npm view @outilx/react-hooks versions');
+  console.log('  npm view @outilx/ai dist-tags');
+  console.log('  npm view @outilx/ai versions');
 }
 
 main().catch((error) => {

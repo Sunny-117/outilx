@@ -13,6 +13,7 @@ Outilx is a monorepo of high-quality, well-tested utility libraries designed to 
 | [@outilx/browser](./packages/browser) | Browser environment utilities | ![npm](https://img.shields.io/npm/v/@outilx/browser) |
 | [@outilx/node](./packages/node) | Node.js environment utilities | ![npm](https://img.shields.io/npm/v/@outilx/node) |
 | [@outilx/react-hooks](./packages/react-hooks) | React Hooks collection | ![npm](https://img.shields.io/npm/v/@outilx/react-hooks) |
+| [@outilx/ai](./packages/ai) | AI utilities for code detection and streaming | ![npm](https://img.shields.io/npm/v/@outilx/ai) |
 
 ## ✨ Features
 
@@ -36,6 +37,9 @@ npm install @outilx/node
 
 # React Hooks
 npm install @outilx/react-hooks
+
+# AI utilities
+npm install @outilx/ai
 ```
 
 ### Usage Examples
@@ -45,7 +49,7 @@ npm install @outilx/react-hooks
 import { toArray, TipCache, parseJsonWithFallback } from '@outilx/browser';
 
 const arr = toArray(1); // [1]
-const cache = new TipCache({ ttl: 5000 });
+const cache = new TipCache(100);
 
 // @outilx/node - File operations, directory management
 import { ensureDirExists, deleteEmptyDirs } from '@outilx/node';
@@ -61,6 +65,12 @@ function Component() {
   const [load, isPending] = useTaskPendingState(fetchData, setItems);
   // ...
 }
+
+// @outilx/ai - Code detection and streaming simulation
+import { detectCodeBlocks, useStreamingSimulator } from '@outilx/ai';
+
+const blocks = detectCodeBlocks(markdownText);
+const { content, startStreaming } = useStreamingSimulator({ chunks, interval: 100 });
 ```
 
 ## 📚 Documentation

@@ -9,3 +9,4 @@ packages/*/node_modules
 *.tsbuildinfo
 docs/.vitepress/cache/deps
 .turbo
+docs/.vitepress/cache/

@@ -11,6 +11,7 @@ Outilx is a modern, modular utility library collection for JavaScript/TypeScript
 - **[@outilx/browser](/guide/browser)** - Utilities for browser environments
 - **[@outilx/node](/guide/node)** - Utilities for Node.js environments
 - **[@outilx/react-hooks](/guide/react-hooks)** - High-quality React Hooks library
+- **[@outilx/ai](/guide/ai)** - AI utilities for code detection and streaming
 
 ## Features
 
@@ -36,6 +37,10 @@ npm install @outilx/node
 
 ```bash [React]
 npm install @outilx/react-hooks
+```
+
+```bash [AI]
+npm install @outilx/ai
 ```
 
 :::
@@ -68,6 +73,16 @@ function App() {
 }
 ```
 
+```typescript [AI]
+import { detectCodeBlocks, useStreamingSimulator } from '@outilx/ai';
+
+const blocks = detectCodeBlocks(markdownText);
+const { content, startStreaming } = useStreamingSimulator({ 
+  chunks: ['Hello', ' ', 'World'], 
+  interval: 100 
+});
+```
+
 :::
 
 ## Next Steps
@@ -75,4 +90,5 @@ function App() {
 - Learn about [@outilx/browser](/guide/browser)
 - Learn about [@outilx/node](/guide/node)
 - Learn about [@outilx/react-hooks](/guide/react-hooks)
+- Learn about [@outilx/ai](/guide/ai)
 - Browse the [API Reference](/api/)

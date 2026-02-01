@@ -59,3 +59,15 @@ Hooks for handling asynchronous operations (cancelable tasks, pending state trac
 
 ### [Utilities](/api/react-hooks/utilities)
 Utility functions for creating custom hooks.
+
+---
+
+## @outilx/ai
+
+AI utilities for code detection and streaming simulation.
+
+### [Code Detection](/api/ai/code-detection)
+Detect and parse code blocks from markdown-formatted text with automatic language identification.
+
+### [Streaming Simulation](/api/ai/streaming)
+React hook for simulating streaming data, perfect for testing AI chat interfaces and demos.
