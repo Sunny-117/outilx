@@ -1,4 +1,4 @@
-import { defineConfig, type Options } from "tsdown";
+import { defineConfig, UserConfig } from "tsdown";
 
 export interface BuildOptions {
   entry: string[];
@@ -9,7 +9,7 @@ export interface BuildOptions {
 export function createBuildConfig(options: BuildOptions) {
   const { entry, platform = "browser", formats = ["esm", "cjs"] } = options;
 
-  const commonConfig: Options = {
+  const commonConfig: UserConfig = {
     entry,
     clean: true,
     minify: false,
@@ -19,7 +19,7 @@ export function createBuildConfig(options: BuildOptions) {
     platform: platform === "node" ? "node" : "browser",
   };
 
-  const configs: Options[] = [];
+  const configs: UserConfig[] = [];
 
   if (formats.includes("esm")) {
     configs.push({
