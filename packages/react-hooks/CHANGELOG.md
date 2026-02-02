@@ -1,5 +1,11 @@
 # @outilx/react-hooks
 
+## 0.0.7
+
+### Patch Changes
+
+- 发布新版本
+
 ## 0.0.6
 
 ### Patch Changes
