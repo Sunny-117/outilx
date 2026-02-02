@@ -1,6 +1,6 @@
 # @outilx/browser
 
-Browser utility functions for arrays, caching, JSON, URL parsing, and more.
+Browser utility functions for arrays, caching, JSON, URL parsing, async processing, and more.
 
 ## Installation
 
@@ -15,7 +15,16 @@ yarn add @outilx/browser
 ## Usage
 
 ```typescript
-import { toArray, createIncrementingArray, TipCache, getUrlParams, parseJsonWithFallback } from '@outilx/browser';
+import { 
+  toArray, 
+  createIncrementingArray, 
+  TipCache, 
+  getUrlParams, 
+  parseJsonWithFallback,
+  createAsyncProcessor,
+  MemoryCache,
+  promisify
+} from '@outilx/browser';
 
 // Array utilities
 const arr = toArray(1); // [1]
@@ -31,6 +40,21 @@ const params = getUrlParams('foo=bar&baz=qux');
 
 // Safe JSON parsing
 const data = parseJsonWithFallback('{"name":"John"}', {});
+
+// Async processing with caching
+function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
+  setTimeout(() => cb(null, a + b), 1000);
+}
+
+const optimizedSum = createAsyncProcessor(asyncAdd, {
+  mode: 'parallel',
+  cache: new MemoryCache(),
+  keyGenerator: (a, b) => `add_${a}_${b}`
+});
+
+// Promisify callback-style functions
+const promisifiedAdd = promisify(asyncAdd);
+const result = await promisifiedAdd(1, 2); // 3
 ```
 
 ## Features
@@ -40,6 +64,8 @@ const data = parseJsonWithFallback('{"name":"John"}', {});
 - Safe JSON operations
 - URL query string parsing
 - Network utilities
+- Async processing with caching and execution strategies
+- Promisify callback-style functions
 
 ## License
 

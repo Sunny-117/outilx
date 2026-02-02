@@ -54,6 +54,7 @@ export default defineConfig({
             { text: "JSON", link: "/api/browser/json" },
             { text: "URL", link: "/api/browser/url" },
             { text: "Network", link: "/api/browser/network" },
+            { text: "Async", link: "/api/browser/async" },
           ],
         },
         {

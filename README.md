@@ -45,11 +45,20 @@ npm install @outilx/ai
 ### Usage Examples
 
 ```typescript
-// @outilx/browser - Array manipulation, caching, JSON utilities
-import { toArray, TipCache, parseJsonWithFallback } from '@outilx/browser';
+// @outilx/browser - Array manipulation, caching, JSON utilities, async processing
+import { toArray, TipCache, parseJsonWithFallback, createAsyncProcessor, MemoryCache } from '@outilx/browser';
 
 const arr = toArray(1); // [1]
 const cache = new TipCache(100);
+
+// Async processing with caching
+function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
+  setTimeout(() => cb(null, a + b), 1000);
+}
+const optimizedSum = createAsyncProcessor(asyncAdd, {
+  mode: 'parallel',
+  cache: new MemoryCache()
+});
 
 // @outilx/node - File operations, directory management
 import { ensureDirExists, deleteEmptyDirs } from '@outilx/node';

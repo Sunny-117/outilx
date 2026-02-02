@@ -9,6 +9,7 @@ Browser utility functions for modern web development.
 - [JSON](/api/browser/json) - Safe JSON operations
 - [URL](/api/browser/url) - URL parameter parsing
 - [Network](/api/browser/network) - Network utilities
+- [Async](/api/browser/async) - Async processing with caching and execution strategies
 
 ## Installation
 
@@ -25,7 +26,10 @@ import {
   TipCache, 
   getUrlParams,
   parseJsonWithFallback,
-  isJsonString
+  isJsonString,
+  createAsyncProcessor,
+  MemoryCache,
+  promisify
 } from '@outilx/browser';
 
 // Array utilities
@@ -42,4 +46,14 @@ const params = getUrlParams(window.location.search.slice(1));
 // Safe JSON operations
 const data = parseJsonWithFallback(jsonString, {});
 const valid = isJsonString('{"key": "value"}'); // true
+
+// Async processing
+function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
+  setTimeout(() => cb(null, a + b), 1000);
+}
+
+const optimizedSum = createAsyncProcessor(asyncAdd, {
+  mode: 'parallel',
+  cache: new MemoryCache()
+});
 ```

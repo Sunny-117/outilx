@@ -113,6 +113,40 @@ const config = getConfigFromDataSource(data);
 // }
 ```
 
+### Async Processing
+
+Convert callback-style async functions to Promises with caching and execution strategies:
+
+```typescript
+import { createAsyncProcessor, MemoryCache, LocalStorageCache, promisify } from '@outilx/browser';
+
+// Simple promisify
+function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
+  setTimeout(() => cb(null, a + b), 1000);
+}
+
+const promisifiedAdd = promisify(asyncAdd);
+const result = await promisifiedAdd(1, 2); // 3
+
+// Advanced processor with caching
+const optimizedSum = createAsyncProcessor(asyncAdd, {
+  mode: 'parallel', // or 'serial'
+  cache: new MemoryCache(),
+  keyGenerator: (a, b) => `add_${a}_${b}`
+});
+
+// First call - takes 1 second
+const sum1 = await optimizedSum(1, 2, 3, 4); // 10
+
+// Second call - instant (cached)
+const sum2 = await optimizedSum(1, 2, 3, 4); // 10
+
+// Use LocalStorage cache
+const persistentProcessor = createAsyncProcessor(asyncAdd, {
+  cache: new LocalStorageCache('my_cache_')
+});
+```
+
 ## API Reference
 
 Browse the complete API documentation:
@@ -122,3 +156,4 @@ Browse the complete API documentation:
 - [JSON](/api/browser/json)
 - [URL](/api/browser/url)
 - [Network](/api/browser/network)
+- [Async](/api/browser/async)

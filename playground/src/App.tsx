@@ -1,14 +1,38 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CodeDetectionDemo from './demos/CodeDetectionDemo';
 import StreamingDemo from './demos/StreamingDemo';
 import SSEDemo from './demos/SSEDemo';
 import BrowserDemo from './demos/BrowserDemo';
 import ReactHooksDemo from './demos/ReactHooksDemo';
+import { AsyncProcessorDemo } from './demos/AsyncProcessorDemo';
 
-type DemoType = 'code-detection' | 'streaming' | 'sse' | 'browser' | 'react-hooks';
+type DemoType = 'code-detection' | 'streaming' | 'sse' | 'browser' | 'react-hooks' | 'async-processor';
+const validDemos: DemoType[] = ['code-detection', 'streaming', 'sse', 'browser', 'react-hooks', 'async-processor'];
 
 function App() {
-  const [activeDemo, setActiveDemo] = useState<DemoType>('code-detection');
+  const getInitialDemo = (): DemoType => {
+    const hash = window.location.hash.slice(1);
+    return validDemos.includes(hash as DemoType) ? (hash as DemoType) : 'code-detection';
+  };
+
+  const [activeDemo, setActiveDemo] = useState<DemoType>(getInitialDemo());
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (validDemos.includes(hash as DemoType)) {
+        setActiveDemo(hash as DemoType);
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
+  const handleDemoChange = (demo: DemoType) => {
+    window.location.hash = demo;
+    setActiveDemo(demo);
+  };
 
   return (
     <div style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
@@ -17,7 +41,7 @@ function App() {
 
       <nav style={{ marginBottom: '30px', borderBottom: '2px solid #eee', paddingBottom: '10px' }}>
         <button
-          onClick={() => setActiveDemo('code-detection')}
+          onClick={() => handleDemoChange('code-detection')}
           style={{
             padding: '8px 16px',
             marginRight: '10px',
@@ -30,7 +54,7 @@ function App() {
           Code Detection
         </button>
         <button
-          onClick={() => setActiveDemo('streaming')}
+          onClick={() => handleDemoChange('streaming')}
           style={{
             padding: '8px 16px',
             marginRight: '10px',
@@ -43,7 +67,7 @@ function App() {
           Streaming Simulator
         </button>
         <button
-          onClick={() => setActiveDemo('sse')}
+          onClick={() => handleDemoChange('sse')}
           style={{
             padding: '8px 16px',
             marginRight: '10px',
@@ -56,7 +80,7 @@ function App() {
           SSE
         </button>
         <button
-          onClick={() => setActiveDemo('browser')}
+          onClick={() => handleDemoChange('browser')}
           style={{
             padding: '8px 16px',
             marginRight: '10px',
@@ -69,9 +93,10 @@ function App() {
           Browser Utils
         </button>
         <button
-          onClick={() => setActiveDemo('react-hooks')}
+          onClick={() => handleDemoChange('react-hooks')}
           style={{
             padding: '8px 16px',
+            marginRight: '10px',
             border: 'none',
             background: activeDemo === 'react-hooks' ? '#333' : '#eee',
             color: activeDemo === 'react-hooks' ? '#fff' : '#333',
@@ -79,6 +104,18 @@ function App() {
           }}
         >
           React Hooks
+        </button>
+        <button
+          onClick={() => handleDemoChange('async-processor')}
+          style={{
+            padding: '8px 16px',
+            border: 'none',
+            background: activeDemo === 'async-processor' ? '#333' : '#eee',
+            color: activeDemo === 'async-processor' ? '#fff' : '#333',
+            cursor: 'pointer',
+          }}
+        >
+          Async Processor
         </button>
       </nav>
 
@@ -88,6 +125,7 @@ function App() {
         {activeDemo === 'sse' && <SSEDemo />}
         {activeDemo === 'browser' && <BrowserDemo />}
         {activeDemo === 'react-hooks' && <ReactHooksDemo />}
+        {activeDemo === 'async-processor' && <AsyncProcessorDemo />}
       </div>
     </div>
   );
