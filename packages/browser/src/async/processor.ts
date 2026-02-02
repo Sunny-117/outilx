@@ -76,7 +76,7 @@ export function createAsyncProcessor<Args extends any[], Result>(
     }
 
     // Recursive processing for multiple arguments
-    const recursiveProcess = async (currentArgs: any[]): Promise<any> => {
+    async function recursiveProcess(currentArgs: any[]): Promise<any> {
       if (currentArgs.length <= 1)
         return currentArgs[0] || 0
 

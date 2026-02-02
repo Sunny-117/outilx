@@ -15,7 +15,7 @@ export function createBuildConfig(options: BuildOptions) {
     minify: false,
     sourcemap: true,
     dts: true,
-    target: platform === "browser" ? "es2015" : "esnext",
+    target: 'esnext',
     platform: platform === "node" ? "node" : "browser",
   };
 
