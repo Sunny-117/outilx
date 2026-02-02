@@ -1,6 +1,6 @@
 {
   "name": "@outilx/ai",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "AI utilities for code detection, streaming simulation, and more",
   "type": "module",
   "main": "./dist/index.cjs",
