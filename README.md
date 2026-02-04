@@ -152,7 +152,7 @@ Please check our [contributing guidelines](./CONTRIBUTING.md) before submitting.
 
 ## 📄 License
 
-MIT © [Your Name]
+MIT © [Sunny-117]
 
 ---
 
