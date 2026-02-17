@@ -66,9 +66,6 @@ importers:
       '@outilx/core':
         specifier: workspace:*
         version: link:../core
-      fast-json-stable-stringify:
-        specifier: ^2.1.0
-        version: 2.1.0
 
   packages/core:
     dependencies:

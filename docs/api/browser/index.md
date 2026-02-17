@@ -2,15 +2,24 @@
 
 Browser utility functions for modern web development.
 
-## Modules
+> **Note**: This package re-exports all utilities from `@outilx/core`. For runtime-agnostic code, consider using `@outilx/core` directly.
 
-- [Array](/api/browser/array) - Array manipulation and transformation
-- [Cache](/api/browser/cache) - Caching with TTL and memoization
-- [JSON](/api/browser/json) - Safe JSON operations
-- [URL](/api/browser/url) - URL parameter parsing
-- [Network](/api/browser/network) - Network utilities
-- [Async](/api/browser/async) - Async processing with caching and execution strategies
-- [Similarity](/api/browser/similarity) - Text similarity calculation (Levenshtein, TF-IDF)
+## Browser-Specific Modules
+
+- [Network](/api/browser/network) - Network information using browser APIs
+- [Storage](/api/browser/storage) - LocalStorage-based caching
+
+## Core Modules (from @outilx/core)
+
+The following modules are re-exported from `@outilx/core` and work in any JavaScript runtime:
+
+- [Array](/api/core/array) - Array manipulation and transformation
+- [Cache](/api/core/cache) - Caching with TTL and memoization
+- [JSON](/api/core/json) - Safe JSON operations
+- [URL](/api/core/url) - URL parameter parsing
+- [Config](/api/core/config) - Configuration mapping
+- [Async](/api/core/async) - Async processing with caching
+- [Similarity](/api/core/similarity) - Text similarity calculation
 
 ## Installation
 
@@ -22,45 +31,30 @@ npm install @outilx/browser
 
 ```typescript
 import {
+  // Core utilities (from @outilx/core)
   toArray,
-  createIncrementingArray,
   TipCache,
   getUrlParams,
   parseJsonWithFallback,
-  isJsonString,
   createAsyncProcessor,
   MemoryCache,
-  promisify,
   levenshteinSimilarity,
-  tfidfSimilarity
+
+  // Browser-specific utilities
+  getNetWorkInfo,
+  LocalStorageCache
 } from '@outilx/browser';
 
-// Array utilities
+// Core utilities work the same as @outilx/core
 const arr = toArray(1); // [1]
-const nums = createIncrementingArray(5); // [1, 2, 3, 4, 5]
-
-// Caching with LRU
 const cache = new TipCache<string>(100);
-cache.set('key', 'value', 5000); // with 5s TTL
+const params = getUrlParams('foo=bar');
 
-// URL parsing (pass query string, not full URL)
-const params = getUrlParams(window.location.search.slice(1));
+// Browser-specific: Network info
+const info = getNetWorkInfo();
+// { status: 'online', type: '4g', rtt: 50, downlink: 10 }
 
-// Safe JSON operations
-const data = parseJsonWithFallback(jsonString, {});
-const valid = isJsonString('{"key": "value"}'); // true
-
-// Async processing
-function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
-  setTimeout(() => cb(null, a + b), 1000);
-}
-
-const optimizedSum = createAsyncProcessor(asyncAdd, {
-  mode: 'parallel',
-  cache: new MemoryCache()
-});
-
-// Text similarity
-const score = levenshteinSimilarity('hello', 'hallo'); // 0.8
-const results = tfidfSimilarity('搜索词', ['候选1', '候选2']);
+// Browser-specific: Persistent cache
+const storage = new LocalStorageCache('my_app_');
+await storage.set('user', { name: 'John' });
 ```
