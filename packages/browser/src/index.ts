@@ -5,4 +5,5 @@ export * from "./core/cache/TipCache";
 export * from "./core/cache/memoize";
 export * from "./core/json";
 export * from "./core/network";
+export * from "./core/similarity";
 export * from "./async";

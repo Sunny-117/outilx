@@ -10,6 +10,7 @@ Browser utility functions for modern web development.
 - [URL](/api/browser/url) - URL parameter parsing
 - [Network](/api/browser/network) - Network utilities
 - [Async](/api/browser/async) - Async processing with caching and execution strategies
+- [Similarity](/api/browser/similarity) - Text similarity calculation (Levenshtein, TF-IDF)
 
 ## Installation
 
@@ -20,16 +21,18 @@ npm install @outilx/browser
 ## Quick Example
 
 ```typescript
-import { 
+import {
   toArray,
   createIncrementingArray,
-  TipCache, 
+  TipCache,
   getUrlParams,
   parseJsonWithFallback,
   isJsonString,
   createAsyncProcessor,
   MemoryCache,
-  promisify
+  promisify,
+  levenshteinSimilarity,
+  tfidfSimilarity
 } from '@outilx/browser';
 
 // Array utilities
@@ -56,4 +59,8 @@ const optimizedSum = createAsyncProcessor(asyncAdd, {
   mode: 'parallel',
   cache: new MemoryCache()
 });
+
+// Text similarity
+const score = levenshteinSimilarity('hello', 'hallo'); // 0.8
+const results = tfidfSimilarity('搜索词', ['候选1', '候选2']);
 ```

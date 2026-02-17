@@ -147,6 +147,33 @@ const persistentProcessor = createAsyncProcessor(asyncAdd, {
 });
 ```
 
+### Text Similarity
+
+Calculate text similarity using Levenshtein (edit distance) or TF-IDF (semantic):
+
+```typescript
+import { levenshteinSimilarity, tfidfSimilarity, compareSimilarity } from '@outilx/browser';
+
+// Levenshtein - literal similarity (edit distance)
+levenshteinSimilarity('hello', 'hallo');  // 0.8
+levenshteinSimilarity('abc', 'abc');      // 1
+
+// TF-IDF - semantic similarity (supports Chinese)
+const target = '空调回收附近上门高价回收';
+const candidates = [
+  '旧空调上门回收电话',
+  '24小时上门回收空调',
+  '闲鱼二手市场'
+];
+
+const results = tfidfSimilarity(target, candidates);
+// Returns sorted by similarity: [{ text: '...', score: 0.72 }, ...]
+
+// Compare both algorithms
+const comparison = compareSimilarity(target, candidates);
+// [{ text: '...', levenshteinScore: 0.6, tfidfScore: 0.8 }, ...]
+```
+
 ## API Reference
 
 Browse the complete API documentation:
@@ -157,3 +184,4 @@ Browse the complete API documentation:
 - [URL](/api/browser/url)
 - [Network](/api/browser/network)
 - [Async](/api/browser/async)
+- [Similarity](/api/browser/similarity)
