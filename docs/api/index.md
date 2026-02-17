@@ -2,24 +2,42 @@
 
 Browse the API documentation by package:
 
-## @outilx/browser
+## @outilx/core
 
-Utility functions for browser environments.
+Core utility functions that work in any JavaScript runtime (Node.js, Deno, Bun, browsers).
 
-### [Array Utilities](/api/browser/array)
+### [Array Utilities](/api/core/array)
 Functions for array manipulation and transformation.
 
-### [Cache](/api/browser/cache)
+### [Cache](/api/core/cache)
 Caching utilities with TTL support and memoization.
 
-### [JSON](/api/browser/json)
+### [JSON](/api/core/json)
 Safe JSON parsing and stringification utilities.
 
-### [URL](/api/browser/url)
+### [URL](/api/core/url)
 URL parameter parsing and manipulation.
 
+### [Config](/api/core/config)
+Configuration mapping utilities.
+
+### [Async](/api/core/async)
+Async processing with caching and execution strategies.
+
+### [Similarity](/api/core/similarity)
+Text similarity calculation (Levenshtein, TF-IDF).
+
+---
+
+## @outilx/browser
+
+Browser-specific utility functions. Re-exports all of @outilx/core plus:
+
 ### [Network](/api/browser/network)
-Network and HTTP utilities.
+Network and HTTP utilities using browser APIs.
+
+### [Storage](/api/browser/storage)
+LocalStorage-based caching.
 
 ---
 

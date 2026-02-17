@@ -1,6 +1,8 @@
 # @outilx/browser
 
-Browser utility functions for arrays, caching, JSON, URL parsing, async processing, text similarity, and more.
+Browser utility functions for modern web development. This package re-exports all utilities from `@outilx/core` plus browser-specific features.
+
+> **Note**: Most utility functions are now available in `@outilx/core` which works in any JavaScript runtime (Node.js, Deno, Bun, browsers). Use `@outilx/browser` when you need browser-specific features like `LocalStorageCache` or `getNetWorkInfo`.
 
 ## Installation
 
@@ -16,6 +18,7 @@ yarn add @outilx/browser
 
 ```typescript
 import {
+  // Core utilities (re-exported from @outilx/core)
   toArray,
   createIncrementingArray,
   TipCache,
@@ -26,7 +29,11 @@ import {
   promisify,
   levenshteinSimilarity,
   tfidfSimilarity,
-  compareSimilarity
+  compareSimilarity,
+
+  // Browser-specific utilities
+  getNetWorkInfo,
+  LocalStorageCache
 } from '@outilx/browser';
 
 // Array utilities
@@ -43,6 +50,15 @@ const params = getUrlParams('foo=bar&baz=qux');
 
 // Safe JSON parsing
 const data = parseJsonWithFallback('{"name":"John"}', {});
+
+// Browser-specific: Network info
+const networkInfo = getNetWorkInfo();
+// { status: 'online', type: '4g', rtt: 50, downlink: 10 }
+
+// Browser-specific: LocalStorage cache
+const persistentCache = new LocalStorageCache('my_prefix_');
+await persistentCache.set('key', { data: 'value' });
+const stored = await persistentCache.get('key');
 
 // Async processing with caching
 function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
@@ -75,14 +91,19 @@ const comparison = compareSimilarity(target, candidates);
 
 ## Features
 
+### From @outilx/core (works anywhere)
 - Array utilities (toArray, shuffleArray, pipeFromArray, createIncrementingArray)
-- LRU caching with TTL support
+- LRU caching with TTL support (TipCache)
 - Safe JSON operations
 - URL query string parsing
-- Network utilities
 - Async processing with caching and execution strategies
 - Promisify callback-style functions
 - Text similarity calculation (Levenshtein, TF-IDF, cosine similarity)
+- Memoization
+
+### Browser-specific
+- Network utilities (`getNetWorkInfo`) - uses `navigator.connection`
+- LocalStorage cache (`LocalStorageCache`) - persistent cache using localStorage
 
 ## Text Similarity
 

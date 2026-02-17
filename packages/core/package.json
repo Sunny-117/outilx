@@ -1,7 +1,7 @@
 {
-  "name": "@outilx/browser",
-  "version": "0.0.9",
-  "description": "Browser utility functions for modern web development",
+  "name": "@outilx/core",
+  "version": "0.0.1",
+  "description": "Core JavaScript utility functions for any runtime (Node.js, Deno, Bun, browsers)",
   "type": "module",
   "main": "./dist/index.cjs",
   "module": "./dist/index.js",
@@ -33,6 +33,6 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
-    "@outilx/core": "workspace:*"
+    "fast-json-stable-stringify": "^2.1.0"
   }
 }

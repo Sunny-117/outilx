@@ -1,9 +1,6 @@
-export * from "./core/array";
-export * from "./core/config";
-export * from "./core/url";
-export * from "./core/cache/TipCache";
-export * from "./core/cache/memoize";
-export * from "./core/json";
-export * from "./core/network";
-export * from "./core/similarity";
-export * from "./async";
+// Re-export all utilities from @outilx/core for backward compatibility
+export * from '@outilx/core'
+
+// Browser-specific exports
+export * from './core/network'
+export { LocalStorageCache } from './storage'
