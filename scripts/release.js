@@ -277,6 +277,8 @@ ${message}
   console.log('  npm view @outilx/react-hooks versions');
   console.log('  npm view @outilx/ai dist-tags');
   console.log('  npm view @outilx/ai versions');
+  console.log('  npm view @outilx/core dist-tags');
+  console.log('  npm view @outilx/core versions');
 }
 
 main().catch((error) => {

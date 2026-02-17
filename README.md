@@ -10,10 +10,11 @@ Outilx is a monorepo of high-quality, well-tested utility libraries designed to 
 
 | Package | Description | Version |
 |---------|-------------|---------|
-| [@outilx/browser](./packages/browser) | Browser environment utilities | ![npm](https://img.shields.io/npm/v/@outilx/browser) |
+| [@outilx/core](./packages/core) | Core utilities for any runtime (Node.js, Deno, Bun, browsers) | ![npm](https://img.shields.io/npm/v/@outilx/core) |
+| [@outilx/browser](./packages/browser) | Browser environment utilities (includes @outilx/core) | ![npm](https://img.shields.io/npm/v/@outilx/browser) |
 | [@outilx/node](./packages/node) | Node.js environment utilities | ![npm](https://img.shields.io/npm/v/@outilx/node) |
 | [@outilx/react-hooks](./packages/react-hooks) | React Hooks collection | ![npm](https://img.shields.io/npm/v/@outilx/react-hooks) |
-| [@outilx/ai](./packages/ai) | AI utilities for code detection and streaming | ![npm](https://img.shields.io/npm/v/@outilx/ai) |
+| [@outilx/ai](./packages/ai) | AI utilities for code detection, streaming, and SSE | ![npm](https://img.shields.io/npm/v/@outilx/ai) |
 
 ## ✨ Features
 
@@ -29,7 +30,10 @@ Outilx is a monorepo of high-quality, well-tested utility libraries designed to 
 Choose the package that fits your needs:
 
 ```bash
-# Browser utilities
+# Core utilities (works in any JS runtime)
+npm install @outilx/core
+
+# Browser utilities (includes core)
 npm install @outilx/browser
 
 # Node.js utilities
@@ -45,41 +49,44 @@ npm install @outilx/ai
 ### Usage Examples
 
 ```typescript
-// @outilx/browser - Array manipulation, caching, JSON utilities, async processing
-import { toArray, TipCache, parseJsonWithFallback, createAsyncProcessor, MemoryCache } from '@outilx/browser';
+// @outilx/core - Array, JSON, cache, async utilities (works everywhere)
+import { toArray, parseJsonWithFallback, MemoryCache, TipCache, createAsyncProcessor } from '@outilx/core';
 
 const arr = toArray(1); // [1]
 const cache = new TipCache(100);
+const memCache = new MemoryCache();
 
-// Async processing with caching
-function asyncAdd(a: number, b: number, cb: (err: null, result: number) => void) {
-  setTimeout(() => cb(null, a + b), 1000);
-}
-const optimizedSum = createAsyncProcessor(asyncAdd, {
-  mode: 'parallel',
-  cache: new MemoryCache()
-});
+// @outilx/browser - Browser-specific utilities + all core exports
+import { LocalStorageCache, toArray } from '@outilx/browser';
+
+const browserCache = new LocalStorageCache('my-app');
 
 // @outilx/node - File operations, directory management
-import { ensureDirExists, deleteEmptyDirs } from '@outilx/node';
+import { ensureDirExists, deleteEmptyDirs, autoPullRepository } from '@outilx/node';
 
 await ensureDirExists('./my-dir');
 await deleteEmptyDirs('./my-dir');
 
-// @outilx/react-hooks - State management, async operations
-import { useArray, useTaskPendingState } from '@outilx/react-hooks';
+// @outilx/react-hooks - State management, async operations, storage
+import {
+  useArray, useBoolean, useToggle, useCounter,
+  useLocalStorageState, useTaskPendingState
+} from '@outilx/react-hooks';
 
 function Component() {
   const [items, { push, removeById }] = useArray([]);
-  const [load, isPending] = useTaskPendingState(fetchData, setItems);
+  const [visible, { toggle }] = useBoolean(false);
+  const [count, { inc, dec }] = useCounter(0);
+  const [value, setValue] = useLocalStorageState('key', { defaultValue: '' });
   // ...
 }
 
-// @outilx/ai - Code detection and streaming simulation
-import { detectCodeBlocks, useStreamingSimulator } from '@outilx/ai';
+// @outilx/ai - Code detection, streaming simulation, SSE
+import { detectCodeBlocks, useStreamingSimulator, useSSE } from '@outilx/ai';
 
 const blocks = detectCodeBlocks(markdownText);
 const { content, startStreaming } = useStreamingSimulator({ chunks, interval: 100 });
+const { data, error, isConnected } = useSSE({ url: '/api/events' });
 ```
 
 ## 📚 Documentation
