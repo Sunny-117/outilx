@@ -15,6 +15,7 @@ export default defineConfig({
       {
         text: "Packages",
         items: [
+          { text: "@outilx/core", link: "/api/core/" },
           { text: "@outilx/browser", link: "/api/browser/" },
           { text: "@outilx/node", link: "/api/node/" },
           { text: "@outilx/react-hooks", link: "/api/react-hooks/" },
@@ -34,6 +35,7 @@ export default defineConfig({
         {
           text: "Packages",
           items: [
+            { text: "Core", link: "/guide/core" },
             { text: "Browser", link: "/guide/browser" },
             { text: "Node.js", link: "/guide/node" },
             { text: "React Hooks", link: "/guide/react-hooks" },
@@ -47,19 +49,30 @@ export default defineConfig({
           items: [{ text: "API Reference", link: "/api/" }],
         },
         {
+          text: "@outilx/core",
+          items: [
+            { text: "Overview", link: "/api/core/" },
+            { text: "Array", link: "/api/core/array" },
+            { text: "Cache", link: "/api/core/cache" },
+            { text: "JSON", link: "/api/core/json" },
+            { text: "URL", link: "/api/core/url" },
+            { text: "Config", link: "/api/core/config" },
+            { text: "Async", link: "/api/core/async" },
+            { text: "Similarity", link: "/api/core/similarity" },
+          ],
+        },
+        {
           text: "@outilx/browser",
           items: [
-            { text: "Array", link: "/api/browser/array" },
-            { text: "Cache", link: "/api/browser/cache" },
-            { text: "JSON", link: "/api/browser/json" },
-            { text: "URL", link: "/api/browser/url" },
+            { text: "Overview", link: "/api/browser/" },
             { text: "Network", link: "/api/browser/network" },
-            { text: "Async", link: "/api/browser/async" },
+            { text: "Storage", link: "/api/browser/storage" },
           ],
         },
         {
           text: "@outilx/node",
           items: [
+            { text: "Overview", link: "/api/node/" },
             { text: "File Operations", link: "/api/node/file-operations" },
             { text: "Directory", link: "/api/node/directory" },
             { text: "Repository", link: "/api/node/repository" },
