@@ -1,5 +1,16 @@
 # @outilx/browser
 
+## 1.0.0
+
+### Major Changes
+
+- f622053: release
+
+### Patch Changes
+
+- Updated dependencies [f622053]
+  - @outilx/core@1.0.0
+
 ## 0.0.8
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@outilx/core",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Core JavaScript utility functions for any runtime (Node.js, Deno, Bun, browsers)",
   "type": "module",
   "main": "./dist/index.cjs",
