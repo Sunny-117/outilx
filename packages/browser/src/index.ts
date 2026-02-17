@@ -2,5 +2,5 @@
 export * from '@outilx/core'
 
 // Browser-specific exports
-export * from './core/network'
+export * from './network'
 export { LocalStorageCache } from './storage'
